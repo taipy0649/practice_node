@@ -7,6 +7,20 @@ app.use((req, res, next) => {
     next()
 })
 
+app.use(
+    express.urlencoded({
+        extended: false
+    })
+)
+
+app.use(express.json())
+
+app.post("/", (req, res) => {
+    console.log(req.body)
+    console.log(req.query)
+    res.send('POST successful')
+})
+
 app.get("/item/:vegetable", (req, res) => {
     let veg = req.params.vegetable
     res.send(`this is page or ${veg}`)
