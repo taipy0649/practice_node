@@ -1,12 +1,8 @@
 const port = 3000,
     express = require('express'),
-    app = express()
-
-app.use((req, res, next) => {
-    console.log(req.url)
-    next()
-})
-
+    app = express(),
+    homeController = require('./controllers/homeController')
+    
 app.use(
     express.urlencoded({
         extended: false
@@ -15,16 +11,16 @@ app.use(
 
 app.use(express.json())
 
-app.post("/", (req, res) => {
-    console.log(req.body)
+app.use((req, res, next) => {
+    console.log(req.url)
     console.log(req.query)
-    res.send('POST successful')
+    next()
 })
 
-app.get("/item/:vegetable", (req, res) => {
-    let veg = req.params.vegetable
-    res.send(`this is page or ${veg}`)
-})
+
+app.post("/", homeController.logPostData)
+
+app.get("/item/:vegetable", homeController.sendReqParam)
 
 app.listen(port, () => {
     console.log(`The project is running on port: ${port}`)
