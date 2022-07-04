@@ -2,10 +2,11 @@ const port = 3000,
     express = require('express'),
     app = express(),
     homeController = require('./controllers/homeController'),
-    layout = require('express-ejs-layouts')
+    layout = require('express-ejs-layouts'),
+    errorController = require('./controllers/errorController')
 
 app.set('view engine', 'ejs')
-    
+
 app.use(layout)
 
 app.use(
@@ -31,3 +32,7 @@ app.get("/item/:vegetable", homeController.sendReqParam)
 app.listen(port, () => {
     console.log(`The project is running on port: ${port}`)
 })
+
+app.use(errorController.logError)
+app.use(errorController.respondNoResourceFound)
+app.use(errorController.respondInternalError)
