@@ -7,6 +7,5 @@ exports.showSingUp = (req, res) => {
 }
 
 exports.postSignUpForm = (req, res) => {
-    console.log('yes, you did it.')
     res.render('thanks')
 }

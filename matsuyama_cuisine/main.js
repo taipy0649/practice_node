@@ -1,6 +1,7 @@
 const express = require('express'),
     app = express(),
-    homeController = require('./controllers/homeController')
+    homeController = require('./controllers/homeController'),
+    layouts = require('express-ejs-layouts')
 
 
 app.set('port', process.env.POTR || 3000)
@@ -13,6 +14,7 @@ app.use(
     })
 )
 app.use(express.json())
+app.use(layouts)
 
 // routes
 app.get('/', (req, res) => {
