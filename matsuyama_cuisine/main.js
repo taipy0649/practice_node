@@ -1,7 +1,8 @@
 const express = require('express'),
     app = express(),
     homeController = require('./controllers/homeController'),
-    layouts = require('express-ejs-layouts')
+    layouts = require('express-ejs-layouts'),
+    errorController = require('./controllers/errorController')
 
 
 app.set('port', process.env.POTR || 3000)
@@ -28,3 +29,6 @@ app.post('/contact', homeController.postSignUpForm)
 app.listen(app.get('port'), () => {
     console.log(`This page on port: ${app.get('port')}`)
 })
+
+app.use(errorController.pageNotFoudError)
+app.use(errorController.internalServerError)
